@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreshDirectShouldHireChrisB", "FreshDirectShouldHireChrisB\FreshDirectShouldHireChrisB.csproj", "{D5C4C884-7999-402C-A53D-8C558C436D40}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhone = Release|iPhone
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D5C4C884-7999-402C-A53D-8C558C436D40}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{D5C4C884-7999-402C-A53D-8C558C436D40}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{D5C4C884-7999-402C-A53D-8C558C436D40}.Release|iPhone.ActiveCfg = Release|iPhone
+		{D5C4C884-7999-402C-A53D-8C558C436D40}.Release|iPhone.Build.0 = Release|iPhone
+		{D5C4C884-7999-402C-A53D-8C558C436D40}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{D5C4C884-7999-402C-A53D-8C558C436D40}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{D5C4C884-7999-402C-A53D-8C558C436D40}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{D5C4C884-7999-402C-A53D-8C558C436D40}.Debug|iPhone.Build.0 = Debug|iPhone
+	EndGlobalSection
+EndGlobal
