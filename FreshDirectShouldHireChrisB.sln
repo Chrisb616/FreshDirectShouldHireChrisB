@@ -1,7 +1,7 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreshDirectShouldHireChrisB", "FreshDirectShouldHireChrisB\FreshDirectShouldHireChrisB.csproj", "{D5C4C884-7999-402C-A53D-8C558C436D40}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreshDirectShouldHireChrisB", "FreshDirectShouldHireChrisB\FreshDirectShouldHireChrisB.csproj", "{34A7C775-EA5C-4BDC-9CF7-F85C08246646}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,13 +11,13 @@ Global
 		Debug|iPhone = Debug|iPhone
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D5C4C884-7999-402C-A53D-8C558C436D40}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
-		{D5C4C884-7999-402C-A53D-8C558C436D40}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
-		{D5C4C884-7999-402C-A53D-8C558C436D40}.Release|iPhone.ActiveCfg = Release|iPhone
-		{D5C4C884-7999-402C-A53D-8C558C436D40}.Release|iPhone.Build.0 = Release|iPhone
-		{D5C4C884-7999-402C-A53D-8C558C436D40}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
-		{D5C4C884-7999-402C-A53D-8C558C436D40}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
-		{D5C4C884-7999-402C-A53D-8C558C436D40}.Debug|iPhone.ActiveCfg = Debug|iPhone
-		{D5C4C884-7999-402C-A53D-8C558C436D40}.Debug|iPhone.Build.0 = Debug|iPhone
+		{34A7C775-EA5C-4BDC-9CF7-F85C08246646}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{34A7C775-EA5C-4BDC-9CF7-F85C08246646}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{34A7C775-EA5C-4BDC-9CF7-F85C08246646}.Release|iPhone.ActiveCfg = Release|iPhone
+		{34A7C775-EA5C-4BDC-9CF7-F85C08246646}.Release|iPhone.Build.0 = Release|iPhone
+		{34A7C775-EA5C-4BDC-9CF7-F85C08246646}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{34A7C775-EA5C-4BDC-9CF7-F85C08246646}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{34A7C775-EA5C-4BDC-9CF7-F85C08246646}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{34A7C775-EA5C-4BDC-9CF7-F85C08246646}.Debug|iPhone.Build.0 = Debug|iPhone
 	EndGlobalSection
 EndGlobal

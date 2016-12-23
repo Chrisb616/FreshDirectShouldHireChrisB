@@ -14,13 +14,45 @@ namespace FreshDirectShouldHireChrisB
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-			// Perform any additional setup after loading the view, typically from a nib.
+
+			LayoutSubviews();
 		}
 
-		public override void DidReceiveMemoryWarning()
+		public void LayoutSubviews()
 		{
-			base.DidReceiveMemoryWarning();
-			// Release any cached data, images, etc that aren't in use.
+			var Button = new UIButton();
+
+			Button.BackgroundColor = UIColor.Blue;
+
+			View.AddSubview(Button);
+
+			Button.Frame = CoreGraphics.CGRect.FromLTRB(
+				View.Frame.Right * 0.1f,
+				View.Frame.Bottom * 0.2f,
+				View.Frame.Right * 0.9f,
+				View.Frame.Bottom * 0.3f
+			);
+
+			Button.TouchUpInside += Button_TouchUpInside;
+
+		}
+
+		void Button_TouchUpInside(object sender, EventArgs e)
+		{
+			Console.WriteLine("Button Tapped");
+
+			var dest = new SolutionOneViewController();
+
+			PresentViewController(
+				dest,
+				true,
+				HandleAction
+			);
+		}
+
+		void HandleAction()
+		{
+
 		}
 	}
 }

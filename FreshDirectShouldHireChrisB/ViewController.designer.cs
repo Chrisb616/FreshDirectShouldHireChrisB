@@ -14,16 +14,8 @@ namespace FreshDirectShouldHireChrisB
     [Register ("ViewController")]
     partial class ViewController
     {
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton SolutionOne { get; set; }
-
         void ReleaseDesignerOutlets ()
         {
-            if (SolutionOne != null) {
-                SolutionOne.Dispose ();
-                SolutionOne = null;
-            }
         }
     }
 }
