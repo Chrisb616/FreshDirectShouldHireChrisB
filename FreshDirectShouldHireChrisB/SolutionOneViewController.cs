@@ -42,6 +42,7 @@ namespace FreshDirectShouldHireChrisB
 			UserNameTextField = new UITextField();
 			UserNameTextField.BackgroundColor = UIColor.White;
 			UserNameTextField.Layer.CornerRadius = 2;
+			UserNameTextField.Placeholder = "Enter a username";
 
 			View.AddSubview(UserNameTextField);
 
