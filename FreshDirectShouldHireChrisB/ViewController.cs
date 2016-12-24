@@ -41,7 +41,7 @@ namespace FreshDirectShouldHireChrisB
 		{
 			Console.WriteLine("Button Tapped");
 
-			var dest = new SolutionOneViewController();
+			var dest = new SolutionTwoViewController();
 
 			PresentViewController(
 				dest,
