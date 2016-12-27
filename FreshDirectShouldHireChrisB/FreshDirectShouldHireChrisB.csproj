@@ -125,6 +125,8 @@
     <Compile Include="SolutionTwoViewController.designer.cs">
       <DependentUpon>SolutionTwoViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Post.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="json.net">
