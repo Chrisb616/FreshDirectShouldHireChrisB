@@ -1,4 +1,8 @@
 ﻿using System;
+<<<<<<< HEAD
+=======
+using System.Runtime;
+>>>>>>> workingBranch
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
@@ -9,7 +13,16 @@ namespace FreshDirectShouldHireChrisB
 {
 	public partial class SolutionTwoViewController : UIViewController
 	{
+<<<<<<< HEAD
 		public User user { get; set; }
+=======
+		User user;
+		List<Post> posts = new List<Post>();
+
+		UITextField usernameTextField = new UITextField();
+		UIButton searchButton = new UIButton();
+		UITableView postHistoryTableView = new UITableView();
+>>>>>>> workingBranch
 
 		public SolutionTwoViewController() : base("SolutionTwoViewController", null)
 		{
@@ -21,14 +34,45 @@ namespace FreshDirectShouldHireChrisB
 			base.ViewDidLoad();
 
 			Console.WriteLine("View Did Load");
-			getApps();
+			getTwitterHistory();
+			setUpViews();
+			setUpTableView();
 		}
 
+<<<<<<< HEAD
 		public void getApps()
+=======
+		public void setUpViews()
+		{
+			View.BackgroundColor = new UIColor(74f / 255f, 54f / 255f, 76f / 255f, 1f);
+		}
+
+		public void setUpTableView()
+		{
+			postHistoryTableView.RegisterClassForCellReuse(typeof(UITableViewCell), "postCell");
+			postHistoryTableView.SeparatorStyle = UITableViewCellSeparatorStyle.None;
+
+			postHistoryTableView.Delegate = new PostHistoryTableViewDelegate();
+			postHistoryTableView.DataSource = new PostHistoryTableViewDataSource(posts);
+
+
+			this.View.AddSubview(postHistoryTableView);
+
+			postHistoryTableView.Frame = CoreGraphics.CGRect.FromLTRB(
+				0,
+				UIScreen.MainScreen.Bounds.Height * 0.3f,
+				UIScreen.MainScreen.Bounds.Width,
+				UIScreen.MainScreen.Bounds.Height
+			);
+		}
+
+		public void getTwitterHistory()
+>>>>>>> workingBranch
 		{
 			var config = NSUrlSessionConfiguration.CreateBackgroundSessionConfiguration("com.SimpleBackgroundTransfer.BackgroundSession");
-			var session = NSUrlSession.FromConfiguration(config, (NSUrlSessionDelegate)new NetworkDelegate(), new NSOperationQueue());
-			var url = NSUrl.FromString("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=cboynton16&count=2");
+			var downloadDelegate = (NSUrlSessionDelegate)new NetworkDelegate(HandleUserDataRetrieved,HandlePostDataRetrieved);
+			var session = NSUrlSession.FromConfiguration(config, downloadDelegate, new NSOperationQueue());
+			var url = NSUrl.FromString("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=cboynton16");
 			var request = new NSMutableUrlRequest(url);
 
 
@@ -46,9 +90,78 @@ namespace FreshDirectShouldHireChrisB
 			downloadTask.Resume();
 		}
 
+<<<<<<< HEAD
+=======
+		void HandleUserDataRetrieved(FreshDirectShouldHireChrisB.User user)
+		{
+			this.user = user;
+			Console.WriteLine("In User Handle Function");
+			Console.WriteLine(user.screen_name);
+			return;
+		}
+		void HandlePostDataRetrieved(List<FreshDirectShouldHireChrisB.Post> posts)
+		{
+			NSOperationQueue.MainQueue.AddOperation(() =>
+			{
+				this.posts = posts;
+				postHistoryTableView.DataSource = new PostHistoryTableViewDataSource(this.posts);
+				Console.WriteLine("In Post Handle Function");
+				foreach (Post post in posts)
+				{
+					Console.WriteLine(post.text);
+				}
+				postHistoryTableView.ReloadData();
+			});
+		}
+
+		public class PostHistoryTableViewDelegate : UITableViewDelegate {}
+		public class PostHistoryTableViewDataSource : UITableViewDataSource {
+
+			List<Post> posts;
+
+			public PostHistoryTableViewDataSource(List<Post> posts)
+			{
+				this.posts = posts;
+			}
+
+			public override nint RowsInSection(UITableView tableView, nint section)
+			{
+				return posts.Count;
+			}
+			public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
+			{
+				var cell = tableView.DequeueReusableCell("postCell", indexPath);
+
+				cell.Bounds = CoreGraphics.CGRect.FromLTRB(
+					0,
+					0,
+					UIScreen.MainScreen.Bounds.Width,
+					UIScreen.MainScreen.Bounds.Height * 0.5f
+				);
+
+				cell.BackgroundColor = UIColor.Red;
+				cell.TextLabel.Text = posts[indexPath.Row].text;
+
+				return cell;
+			}
+		}
+>>>>>>> workingBranch
 
 		public class NetworkDelegate : NSUrlSessionDownloadDelegate
 		{
+
+			public delegate void UserDataRetrieved(User user);
+			public delegate void PostDataRetrieved(List<Post> posts);
+
+			UserDataRetrieved UserDataRetrievedDelegate;
+			PostDataRetrieved PostDataRetrievedDelegate;
+
+			public NetworkDelegate(UserDataRetrieved userHandle, PostDataRetrieved postHandle)
+			{
+				UserDataRetrievedDelegate = userHandle;
+				PostDataRetrievedDelegate = postHandle;
+			}
+
 			public override void DidFinishDownloading(NSUrlSession session, NSUrlSessionDownloadTask downloadTask, NSUrl location)
 			{
 				Console.WriteLine(downloadTask.Error);
@@ -56,6 +169,7 @@ namespace FreshDirectShouldHireChrisB
 				NSString dataString = NSString.FromData(data, NSStringEncoding.UTF8);
 				Console.WriteLine(dataString);
 
+<<<<<<< HEAD
 				List<Dictionary<string,object>> posts = JsonConvert.DeserializeObject<List<Dictionary<string,object>>>(dataString);
 
 				var userInfoObject = new object();
@@ -65,6 +179,40 @@ namespace FreshDirectShouldHireChrisB
 				}
 
 				string userInfoString = userInfoObject.ToString();
+=======
+				var postData = JsonConvert.DeserializeObject<List<Dictionary<string,object>>> (dataString);
+
+				FindUserInfo(postData);
+
+				var postObjectList = JsonConvert.DeserializeObject<List<object>>(dataString);
+
+				var posts = new List<Post>();
+
+				foreach (var postObject in postObjectList)
+				{
+					string postString = postObject.ToString();
+					var post = JsonConvert.DeserializeObject<Post>(postString);
+					posts.Add(post);
+				}
+
+				PostDataRetrievedDelegate(posts);
+			}
+			public void FindUserInfo(List<Dictionary<string, object>> postData)
+			{
+
+				object userObject;
+				if (postData[0].TryGetValue("user", out userObject))
+				{
+					Console.WriteLine(userObject);
+				};
+
+				string userString = userObject.ToString();
+
+				var user = JsonConvert.DeserializeObject<User>(userString);
+
+				UserDataRetrievedDelegate(user);
+			}
+>>>>>>> workingBranch
 
 				var user = JsonConvert.DeserializeObject<User>(userInfoString);
 
