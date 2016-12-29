@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Runtime;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 
 using UIKit;
 using Foundation;
@@ -102,7 +101,7 @@ namespace FreshDirectShouldHireChrisB
 		public void getTwitterHistory()
 		{
 			var config = NSUrlSessionConfiguration.CreateBackgroundSessionConfiguration("com.SimpleBackgroundTransfer.BackgroundSession");
-			var downloadDelegate = (NSUrlSessionDelegate)new NetworkDelegate(HandleUserDataRetrieved,HandlePostDataRetrieved);
+			var downloadDelegate = (NSUrlSessionDelegate)new TwitterNetworkDelegate(HandleUserDataRetrieved,HandlePostDataRetrieved);
 			var session = NSUrlSession.FromConfiguration(config, downloadDelegate, new NSOperationQueue());
 			var url = NSUrl.FromString("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=cboynton16");
 			var request = new NSMutableUrlRequest(url);
@@ -127,6 +126,10 @@ namespace FreshDirectShouldHireChrisB
 			this.user = user;
 			Console.WriteLine("In User Handle Function");
 			Console.WriteLine(user.screen_name);
+			NSOperationQueue.MainQueue.AddOperation( () =>
+			{
+				twitterUserInfoView.SetupForUser(user);
+			});
 			return;
 		}
 		void HandlePostDataRetrieved(List<FreshDirectShouldHireChrisB.Post> posts)
@@ -194,62 +197,7 @@ namespace FreshDirectShouldHireChrisB
 			}
 		}
 
-		public class NetworkDelegate : NSUrlSessionDownloadDelegate
-		{
 
-			public delegate void UserDataRetrieved(User user);
-			public delegate void PostDataRetrieved(List<Post> posts);
-
-			UserDataRetrieved UserDataRetrievedDelegate;
-			PostDataRetrieved PostDataRetrievedDelegate;
-
-			public NetworkDelegate(UserDataRetrieved userHandle, PostDataRetrieved postHandle)
-			{
-				UserDataRetrievedDelegate = userHandle;
-				PostDataRetrievedDelegate = postHandle;
-			}
-
-			public override void DidFinishDownloading(NSUrlSession session, NSUrlSessionDownloadTask downloadTask, NSUrl location)
-			{
-				//solution1
-				NSData data = NSFileManager.DefaultManager.Contents(location.Path);
-				NSString dataString = NSString.FromData(data, NSStringEncoding.UTF8);
-				Console.WriteLine(dataString);
-
-				var postData = JsonConvert.DeserializeObject<List<Dictionary<string,object>>> (dataString);
-
-				FindUserInfo(postData);
-
-				var postObjectList = JsonConvert.DeserializeObject<List<object>>(dataString);
-
-				var posts = new List<Post>();
-
-				foreach (var postObject in postObjectList)
-				{
-					string postString = postObject.ToString();
-					var post = JsonConvert.DeserializeObject<Post>(postString);
-					posts.Add(post);
-				}
-
-				PostDataRetrievedDelegate(posts);
-			}
-			public void FindUserInfo(List<Dictionary<string, object>> postData)
-			{
-
-				object userObject;
-				if (postData[0].TryGetValue("user", out userObject))
-				{
-					Console.WriteLine(userObject);
-				};
-
-				string userString = userObject.ToString();
-
-				var user = JsonConvert.DeserializeObject<User>(userString);
-
-				UserDataRetrievedDelegate(user);
-			}
-
-		}
 	}
 }
 

@@ -133,6 +133,7 @@
     <Compile Include="User.cs" />
     <Compile Include="Post.cs" />
     <Compile Include="TwitterUserInfoView.cs" />
+    <Compile Include="TwitterNetworkDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="json.net">
