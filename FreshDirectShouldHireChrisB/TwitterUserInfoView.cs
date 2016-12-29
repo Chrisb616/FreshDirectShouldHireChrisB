@@ -73,6 +73,7 @@ namespace FreshDirectShouldHireChrisB
 			UsernameLabel.Text = "@" + user.screen_name;
 			UserFullNameLabel.Text = user.name;
 			LocationLabel.Text = user.location;
+			ProfilePictureImageView.Image = user.profilePicture;
 		}
 	}
 }

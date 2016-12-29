@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Foundation;
+using UIKit;
 
 namespace FreshDirectShouldHireChrisB
 {
 	public class TwitterNetworkDelegate : NSUrlSessionDownloadDelegate
 	{
+		User user;
 
 		public delegate void UserDataRetrieved(User user);
 		public delegate void PostDataRetrieved(List<Post> posts);
@@ -55,13 +57,29 @@ namespace FreshDirectShouldHireChrisB
 
 			string userString = userObject.ToString();
 
-			var user = JsonConvert.DeserializeObject<User>(userString);
+			user = JsonConvert.DeserializeObject<User>(userString);
 
+			CallImageDownload();
 
+		}
 
-			UserDataRetrievedDelegate(user);
+		public void CallImageDownload()
+		{
+			var config = NSUrlSessionConfiguration.CreateBackgroundSessionConfiguration("com.SimpleBackgroundTransfer.BackgroundSession");
+			var downloadDelegate = (NSUrlSessionDelegate)new TwitterProfileImageDownloadDelegate(HandleImageDownloaded);
+			var session = NSUrlSession.FromConfiguration(config, downloadDelegate, new NSOperationQueue());
+			var url = NSUrl.FromString(user.profile_image_url);
+			var request = new NSMutableUrlRequest(url);
+
+			var task = session.CreateDataTask(request);
+			task.Resume();
 		}
 
 
+		void HandleImageDownloaded(UIImage ProfileImage)
+		{
+			user.profilePicture = ProfileImage;
+			UserDataRetrievedDelegate(user);
+		}
 	}
 }
