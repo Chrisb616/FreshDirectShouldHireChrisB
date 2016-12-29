@@ -95,9 +95,14 @@
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\twitter-128.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\twitter-128.imageset\twitter-128.jpg" />
+    <ImageAsset Include="Assets.xcassets\twitter-128.imageset\twitter-128.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="Assets.xcassets\TwitterIcon.jpg.imageset\" />
+    <Folder Include="Assets.xcassets\twitter-128.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -127,6 +132,7 @@
     </Compile>
     <Compile Include="User.cs" />
     <Compile Include="Post.cs" />
+    <Compile Include="TwitterUserInfoView.cs" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="json.net">

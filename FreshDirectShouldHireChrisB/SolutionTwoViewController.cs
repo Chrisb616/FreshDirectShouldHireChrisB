@@ -17,6 +17,8 @@ namespace FreshDirectShouldHireChrisB
 		UIButton searchButton = new UIButton();
 		UITableView postHistoryTableView = new UITableView();
 
+		TwitterUserInfoView twitterUserInfoView = new TwitterUserInfoView();
+
 		public SolutionTwoViewController() : base("SolutionTwoViewController", null)
 		{
 		}
@@ -34,11 +36,52 @@ namespace FreshDirectShouldHireChrisB
 
 		public void setUpViews()
 		{
+			var BackgroundFrame = UIScreen.MainScreen.Bounds; 
+
 			View.BackgroundColor = new UIColor(74f / 255f, 54f / 255f, 76f / 255f, 1f);
+
+			View.AddSubview(usernameTextField);
+
+			usernameTextField.BackgroundColor = UIColor.White;
+			usernameTextField.Layer.CornerRadius = 3;
+			usernameTextField.AutocorrectionType = UITextAutocorrectionType.No;
+			usernameTextField.AutocapitalizationType = UITextAutocapitalizationType.None;
+			usernameTextField.EditingChanged += HandleTextFieldDidChange;
+			usernameTextField.Placeholder = "Please enter a twitter username";
+			usernameTextField.Frame = CoreGraphics.CGRect.FromLTRB(
+				BackgroundFrame.Width * 0.05f,
+				BackgroundFrame.Height * 0.075f,
+				BackgroundFrame.Width * 0.95f,
+				BackgroundFrame.Height * 0.075f + 30f
+			);
+
+			View.AddSubview(searchButton);
+
+			searchButton.BackgroundColor = UIColor.Clear;
+			searchButton.SetTitle("Get History", UIControlState.Normal);
+			searchButton.Frame = CoreGraphics.CGRect.FromLTRB(
+				BackgroundFrame.Width * 0.25f,
+				usernameTextField.Frame.Bottom + 10f,
+				BackgroundFrame.Width * 0.75f,
+				usernameTextField.Frame.Bottom + 35f
+			);
+			searchButton.Hidden = true;
+			searchButton.TouchUpInside += SearchButtonTapped;
+
+			View.AddSubview(twitterUserInfoView);
+
+			twitterUserInfoView.Frame = CoreGraphics.CGRect.FromLTRB(
+				usernameTextField.Frame.Left,
+				searchButton.Frame.Bottom + 10f,
+				usernameTextField.Frame.Right,
+				searchButton.Frame.Bottom + 110f
+			);
+			twitterUserInfoView.InitialSetUp();
 		}
 
 		public void setUpTableView()
 		{
+			postHistoryTableView.Hidden = true;
 			postHistoryTableView.RegisterClassForCellReuse(typeof(UITableViewCell), "postCell");
 			postHistoryTableView.SeparatorStyle = UITableViewCellSeparatorStyle.None;
 
@@ -101,7 +144,25 @@ namespace FreshDirectShouldHireChrisB
 			});
 		}
 
-		public class PostHistoryTableViewDelegate : UITableViewDelegate {}
+		void HandleTextFieldDidChange(object sender, EventArgs e)
+		{
+			if (usernameTextField.Text == "")
+			{
+				searchButton.Hidden = true;
+			}
+			else {
+				searchButton.Hidden = false;
+			}
+			Console.WriteLine("Did change");
+		}
+		void SearchButtonTapped(object sender, EventArgs e)
+		{
+			usernameTextField.Text = "";
+			searchButton.Hidden = true;
+		}
+
+		public class PostHistoryTableViewDelegate : UITableViewDelegate {
+		}
 		public class PostHistoryTableViewDataSource : UITableViewDataSource {
 
 			List<Post> posts;
