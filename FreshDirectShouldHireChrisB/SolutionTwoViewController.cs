@@ -9,7 +9,6 @@ namespace FreshDirectShouldHireChrisB
 {
 	public partial class SolutionTwoViewController : UIViewController
 	{
-		User user;
 		List<Post> posts = new List<Post>();
 
 		UITextField usernameTextField = new UITextField();
@@ -17,6 +16,8 @@ namespace FreshDirectShouldHireChrisB
 		UITableView postHistoryTableView = new UITableView();
 
 		TwitterUserInfoView twitterUserInfoView = new TwitterUserInfoView();
+
+		NSString cellIdentifier = new NSString("postCell");
 
 		public SolutionTwoViewController() : base("SolutionTwoViewController", null)
 		{
@@ -80,8 +81,7 @@ namespace FreshDirectShouldHireChrisB
 
 		public void setUpTableView()
 		{
-			postHistoryTableView.Hidden = true;
-			postHistoryTableView.RegisterClassForCellReuse(typeof(UITableViewCell), "postCell");
+			postHistoryTableView.RegisterClassForCellReuse(typeof(CustomTweetCell), cellIdentifier);
 			postHistoryTableView.SeparatorStyle = UITableViewCellSeparatorStyle.None;
 
 			postHistoryTableView.Delegate = new PostHistoryTableViewDelegate();
@@ -92,7 +92,7 @@ namespace FreshDirectShouldHireChrisB
 
 			postHistoryTableView.Frame = CoreGraphics.CGRect.FromLTRB(
 				0,
-				UIScreen.MainScreen.Bounds.Height * 0.3f,
+				twitterUserInfoView.Frame.Bottom + 30f,
 				UIScreen.MainScreen.Bounds.Width,
 				UIScreen.MainScreen.Bounds.Height
 			);
@@ -123,7 +123,6 @@ namespace FreshDirectShouldHireChrisB
 
 		void HandleUserDataRetrieved(FreshDirectShouldHireChrisB.User user)
 		{
-			this.user = user;
 			Console.WriteLine("In User Handle Function");
 			Console.WriteLine(user.screen_name);
 			NSOperationQueue.MainQueue.AddOperation( () =>
@@ -172,29 +171,31 @@ namespace FreshDirectShouldHireChrisB
 
 			public PostHistoryTableViewDataSource(List<Post> posts)
 			{
-				this.posts = posts;
+				//this.posts = posts;
+				this.posts = Post.Dummy;
 			}
 
 			public override nint RowsInSection(UITableView tableView, nint section)
 			{
 				return posts.Count;
 			}
+
 			public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
 			{
-				var cell = tableView.DequeueReusableCell("postCell", indexPath);
+				NSString cellIdentifier = new NSString("postCell");
+				var cell = tableView.DequeueReusableCell(cellIdentifier) as CustomTweetCell;
 
-				cell.Bounds = CoreGraphics.CGRect.FromLTRB(
-					0,
-					0,
-					UIScreen.MainScreen.Bounds.Width,
-					UIScreen.MainScreen.Bounds.Height * 0.5f
-				);
 
-				cell.BackgroundColor = UIColor.Red;
-				cell.TextLabel.Text = posts[indexPath.Row].text;
+				if (cell == null)
+				{
+					cell = new CustomTweetCell(cellIdentifier);
+				}
+
+				cell.UpdateCell(posts[indexPath.Row]);
 
 				return cell;
 			}
+
 		}
 
 

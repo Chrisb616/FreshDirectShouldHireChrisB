@@ -135,6 +135,8 @@
     <Compile Include="TwitterUserInfoView.cs" />
     <Compile Include="TwitterNetworkDelegate.cs" />
     <Compile Include="TwitterProfileImageDownloadDelegate.cs" />
+    <Compile Include="CustomTweetCell.cs" />
+    <Compile Include="Colors.cs" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="json.net">

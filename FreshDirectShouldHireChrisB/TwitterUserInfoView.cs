@@ -9,19 +9,17 @@ namespace FreshDirectShouldHireChrisB
 		UILabel UsernameLabel = new UILabel();
 		UILabel UserFullNameLabel = new UILabel();
 		UILabel LocationLabel = new UILabel();
-		UITextView DescriptionTextView = new UITextView();
 
 
 		public void InitialSetUp()
 		{
-			UIColor TwitterBlue = new UIColor(85f / 255f, 172 / 255f, 238 / 255f,1);
 
 			this.Layer.CornerRadius = 3;
 			this.BackgroundColor = UIColor.White;
 
 
 			this.AddSubview(UsernameTopDivider);
-			UsernameTopDivider.BackgroundColor = TwitterBlue;
+			UsernameTopDivider.BackgroundColor = Colors.TwitterBlue;
 			UsernameTopDivider.Layer.CornerRadius = 3;
 			UsernameTopDivider.Frame = CoreGraphics.CGRect.FromLTRB(
 				0,
@@ -30,7 +28,7 @@ namespace FreshDirectShouldHireChrisB
 				this.Frame.Height * 0.3f
 			);
 			this.AddSubview(ProfilePictureImageView);
-			ProfilePictureImageView.BackgroundColor = UIColor.Red;
+			ProfilePictureImageView.BackgroundColor = Colors.TwitterBlue;
 			ProfilePictureImageView.Frame = CoreGraphics.CGRect.FromLTRB(
 				0,
 				0,
