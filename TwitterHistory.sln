@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterHistory", "TwitterHistory\TwitterHistory.csproj", "{C8BEA95E-7FB7-49C3-8909-50B21D763994}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhone = Release|iPhone
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C8BEA95E-7FB7-49C3-8909-50B21D763994}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{C8BEA95E-7FB7-49C3-8909-50B21D763994}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{C8BEA95E-7FB7-49C3-8909-50B21D763994}.Release|iPhone.ActiveCfg = Release|iPhone
+		{C8BEA95E-7FB7-49C3-8909-50B21D763994}.Release|iPhone.Build.0 = Release|iPhone
+		{C8BEA95E-7FB7-49C3-8909-50B21D763994}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{C8BEA95E-7FB7-49C3-8909-50B21D763994}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{C8BEA95E-7FB7-49C3-8909-50B21D763994}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{C8BEA95E-7FB7-49C3-8909-50B21D763994}.Debug|iPhone.Build.0 = Debug|iPhone
+	EndGlobalSection
+EndGlobal
