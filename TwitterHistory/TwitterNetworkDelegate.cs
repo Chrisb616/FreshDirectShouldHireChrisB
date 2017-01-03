@@ -17,15 +17,13 @@ namespace TwitterHistory
 		public delegate void DidRecieveError();
 
 		UserDataRetrieved UserDataRetrievedDelegate;
-		UserProfileImageRetreived UserProfileImageRetrievedDelegate;
 		TweetDataRetrieved TweetDataRetrievedDelegate;
 		DidRecieveError ErrorDelegate;
 
-		public TwitterNetworkDelegate(UserDataRetrieved UserHandle, TweetDataRetrieved TweetHandle, UserProfileImageRetreived ImageHandle, DidRecieveError ErrorHandle)
+		public TwitterNetworkDelegate(UserDataRetrieved UserHandle, TweetDataRetrieved TweetHandle, DidRecieveError ErrorHandle)
 		{
 			UserDataRetrievedDelegate = UserHandle;
 			TweetDataRetrievedDelegate = TweetHandle;
-			UserProfileImageRetrievedDelegate = ImageHandle;
 			ErrorDelegate = ErrorHandle;
 		}
 
@@ -76,40 +74,8 @@ namespace TwitterHistory
 			var user = JsonConvert.DeserializeObject<User>(userString);
 
 			UserDataRetrievedDelegate(user);
-
-			CallImageDownload(user.profile_image_url_https);
 		}
 
-		//public void CallImageDownload(string imageURL)
-		//{
-		//	var config = NSUrlSessionConfiguration.CreateBackgroundSessionConfiguration("com.SimpleBackgroundTransferTwo.BackgroundSession");
-		//	var downloadDelegate = (NSUrlSessionDelegate)new TwitterImageDownloadDelegate(HandleImageDownloaded);
-		//	var session = NSUrlSession.FromConfiguration(config, downloadDelegate, new NSOperationQueue());
-		//	var url = NSUrl.FromString(imageURL);
-		//	var request = new NSMutableUrlRequest(url);
-
-		//	Console.WriteLine(url);
-
-		//	var task = session.CreateDataTask(request);
-		//	task.Resume();
-		//}
-
-		public void CallImageDownload(string imageURL)
-		{
-			
-		}
-
-		void HandleAction(IntPtr arg1, nuint arg2)
-		{
-
-		}
-
-
-		public void HandleImageDownloaded(UIImage ProfileImage)
-		{
-			Console.WriteLine("Should show image");
-			UserProfileImageRetrievedDelegate(ProfileImage);
-		}
 	}
 }
 

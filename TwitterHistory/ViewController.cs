@@ -86,6 +86,7 @@ namespace TwitterHistory
 
 			TweetTableView.Hidden = true;
 			TweetTableView.RowHeight = 100f;
+			TweetTableView.SeparatorStyle = UITableViewCellSeparatorStyle.None;
 		}
 
 		void SearchButtonTapped(object sender, EventArgs e)
@@ -106,7 +107,7 @@ namespace TwitterHistory
 		public void getTwitterHistory()
 		{
 			var config = NSUrlSessionConfiguration.CreateBackgroundSessionConfiguration("com.SimpleBackgroundTransfer.BackgroundSession");
-			var downloadDelegate = (NSUrlSessionDelegate)new TwitterNetworkDelegate(HandleUserDataRetrieved, HandleTweetDataRetrieved, HandleProfileImageDownloaded,HandleDidRecieveError);
+			var downloadDelegate = (NSUrlSessionDelegate)new TwitterNetworkDelegate(HandleUserDataRetrieved, HandleTweetDataRetrieved, HandleDidRecieveError);
 			var session = NSUrlSession.FromConfiguration(config, downloadDelegate, new NSOperationQueue());
 			var url = NSUrl.FromString("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=" + usernameTextField.Text);
 			var request = new NSMutableUrlRequest(url);
@@ -140,10 +141,6 @@ namespace TwitterHistory
 				TweetTableView.Hidden = false;
 				errorLabel.Hidden = true;
 			});
-		}
-		void HandleProfileImageDownloaded(UIImage profileImage)
-		{
-			twitterUserInfoView.UpdateProfileImage(profileImage);
 		}
 
 		public class TweetTableViewDataSource : UITableViewDataSource

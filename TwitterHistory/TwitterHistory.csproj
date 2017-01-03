@@ -122,7 +122,6 @@
     <Compile Include="TwitterUserInfoView.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="TwitterImageDownloadDelegate.cs" />
     <Compile Include="TweetTableViewCell.cs" />
     <Compile Include="TweetTableViewCell.designer.cs">
       <DependentUpon>TweetTableViewCell.cs</DependentUpon>

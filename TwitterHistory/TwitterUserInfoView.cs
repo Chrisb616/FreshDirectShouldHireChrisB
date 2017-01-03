@@ -5,7 +5,6 @@ namespace TwitterHistory
 {
 	public class TwitterUserInfoView : UIView
 	{
-		UIImageView ProfilePictureImageView = new UIImageView();
 		UIView UsernameTopDivider = new UIView();
 		UILabel UsernameLabel = new UILabel();
 		UILabel UserFullNameLabel = new UILabel();
@@ -28,20 +27,11 @@ namespace TwitterHistory
 				this.Frame.Width,
 				this.Frame.Height * 0.3f
 			);
-			this.AddSubview(ProfilePictureImageView);
-			ProfilePictureImageView.BackgroundColor = Constants.TwitterBlue;
-			ProfilePictureImageView.Frame = CoreGraphics.CGRect.FromLTRB(
-				0,
-				0,
-				this.Frame.Height,
-				this.Frame.Height
-			);
-			ProfilePictureImageView.Layer.CornerRadius = 3;
 
 			this.AddSubview(UsernameLabel);
 			UsernameLabel.TextColor = UIColor.White;
 			UsernameLabel.Frame = CoreGraphics.CGRect.FromLTRB(
-				ProfilePictureImageView.Frame.Right + 10f,
+				UsernameTopDivider.Frame.Left + 10f,
 				UsernameTopDivider.Frame.Top,
 				UsernameTopDivider.Frame.Right,
 				UsernameTopDivider.Frame.Bottom
@@ -76,13 +66,6 @@ namespace TwitterHistory
 				LocationLabel.Text = user.location;
 			});
 			
-		}
-		public void UpdateProfileImage(UIImage ProfileImage)
-		{
-			NSOperationQueue.MainQueue.AddOperation(() =>
-			{
-				ProfilePictureImageView.Image = ProfileImage;
-			});
 		}
 		public void clearInfo()
 		{
